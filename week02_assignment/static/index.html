@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopSearch – Algorithm Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header>
+    <span class="logo">ShopSearch</span>
+    <span class="tagline">Algorithm Performance Demo</span>
+  </header>
+
+  <!-- ── Main ──────────────────────────────────────────────── -->
+  <main>
+    <!-- Search Panel -->
+    <section class="search-panel card">
+      <p class="panel-label">Search Products</p>
+
+      <!-- Method tabs -->
+      <div class="method-tabs" role="tablist">
+        <button class="tab active" data-method="id"   role="tab">ID Lookup <span class="badge o1">O(1)</span></button>
+        <button class="tab"        data-method="name" role="tab">Name Search <span class="badge on">O(n)</span></button>
+      </div>
+
+      <!-- Input row -->
+      <div class="input-row">
+        <input id="search-input" type="text" placeholder="Enter product ID or name…" autocomplete="off" />
+        <button id="search-btn" class="btn-primary">Search</button>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"><span>or</span></div>
+
+      <!-- Duplicate button -->
+      <div class="dup-row">
+        <button id="dup-btn" class="btn-danger">
+          Find Duplicates
+          <span class="badge on2">O(n²)</span>
+        </button>
+        <span class="dup-hint">Detects products sharing the same name</span>
+      </div>
+    </section>
+
+    <!-- Stats + Results wrapper -->
+    <div class="results-wrapper">
+      <!-- Stats bar -->
+      <section id="stats-bar" class="stats-bar hidden">
+        <span id="stat-method"  class="stat-chip method-chip"></span>
+        <span id="stat-time"    class="stat-chip time-chip"></span>
+        <span id="stat-count"   class="stat-chip count-chip"></span>
+      </section>
+
+      <!-- Results -->
+      <section id="results-section">
+        <div id="results-grid" class="results-grid"></div>
+        <p id="no-results" class="no-results hidden">No products found.</p>
+        <div id="spinner" class="spinner hidden"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>1,000 products &middot; Three search algorithms &middot; Powered by FastAPI</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
