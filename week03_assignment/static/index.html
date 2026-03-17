@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playlist Sort Manager</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>&#9835; Playlist Sort Manager</h1>
+    <p>Compare sorting algorithms on your music playlist</p>
+  </header>
+
+  <main>
+    <!-- Controls -->
+    <section class="card controls">
+      <div class="control-row">
+        <div class="control-group">
+          <label for="nSongs">Songs</label>
+          <input type="number" id="nSongs" value="20" min="1" max="5000" />
+          <button id="btnGenerate" class="btn btn-primary">Generate Random</button>
+        </div>
+        <div class="control-group">
+          <label for="criterion">Sort By</label>
+          <select id="criterion">
+            <option value="title">Title</option>
+            <option value="artist">Artist</option>
+            <option value="duration">Duration</option>
+            <option value="play_count">Play Count</option>
+          </select>
+          <label for="algorithm">Algorithm</label>
+          <select id="algorithm">
+            <option value="selection">Selection Sort — O(n²)</option>
+            <option value="insertion">Insertion Sort — O(n²)</option>
+            <option value="merge">Merge Sort — O(n log n)</option>
+          </select>
+          <button id="btnSort" class="btn btn-success">Sort</button>
+          <button id="btnCompare" class="btn btn-accent">Compare All</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sort Metrics -->
+    <section id="sortMetrics" class="card metrics-bar hidden">
+      <div class="metric">
+        <span class="label">Algorithm</span>
+        <span id="mAlgorithm" class="value">—</span>
+      </div>
+      <div class="metric">
+        <span class="label">Criterion</span>
+        <span id="mCriterion" class="value">—</span>
+      </div>
+      <div class="metric">
+        <span class="label">Comparisons</span>
+        <span id="mComparisons" class="value">—</span>
+      </div>
+      <div class="metric">
+        <span class="label">Swaps / Writes</span>
+        <span id="mSwaps" class="value">—</span>
+      </div>
+      <div class="metric">
+        <span class="label">Time (ms)</span>
+        <span id="mTime" class="value">—</span>
+      </div>
+    </section>
+
+    <!-- Compare Metrics -->
+    <section id="compareMetrics" class="card hidden">
+      <h2 class="section-title">Algorithm Comparison</h2>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Complexity</th>
+            <th>Comparisons</th>
+            <th>Swaps / Writes</th>
+            <th>Time (ms)</th>
+          </tr>
+        </thead>
+        <tbody id="compareBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Playlist Table -->
+    <section class="card">
+      <div class="table-header">
+        <h2>Playlist</h2>
+        <span id="songCount" class="badge">0 songs</span>
+      </div>
+      <div class="table-wrapper">
+        <table id="playlistTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Duration</th>
+              <th>Play Count</th>
+            </tr>
+          </thead>
+          <tbody id="playlistBody">
+            <tr><td colspan="5" class="empty">No songs yet — generate a playlist to get started.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
