@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dictionary Search — Linear vs Binary</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>English Dictionary Search</h1>
+    <p class="subtitle">Real-time Autocomplete &mdash; Linear Search <span class="vs">vs</span> Binary Search</p>
+  </header>
+
+  <main>
+    <!-- Search bar -->
+    <section class="search-section">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Type a prefix to search…"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <span id="wordCount" class="word-count"></span>
+    </section>
+
+    <!-- Stats bar -->
+    <section id="statsBar" class="stats-bar hidden">
+      <div class="stat">
+        <span class="stat-label">Linear time</span>
+        <span id="linearTime" class="stat-value linear-color">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Binary time</span>
+        <span id="binaryTime" class="stat-value binary-color">—</span>
+      </div>
+      <div class="stat speedup-stat">
+        <span class="stat-label">Speedup (linear / binary)</span>
+        <span id="speedupRatio" class="stat-value speedup-color">—</span>
+      </div>
+    </section>
+
+    <!-- Side-by-side results -->
+    <section class="results-wrapper">
+
+      <div class="results-panel" id="linearPanel">
+        <div class="panel-header linear-bg">
+          <h2>Linear Search</h2>
+          <span class="complexity">O(n) — scan all words</span>
+        </div>
+        <ul id="linearResults" class="result-list">
+          <li class="placeholder">Start typing to see results…</li>
+        </ul>
+      </div>
+
+      <div class="results-panel" id="binaryPanel">
+        <div class="panel-header binary-bg">
+          <h2>Binary Search</h2>
+          <span class="complexity">O(log n) — divide &amp; conquer</span>
+        </div>
+        <ul id="binaryResults" class="result-list">
+          <li class="placeholder">Start typing to see results…</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Explanation card -->
+    <section class="explanation">
+      <h3>How it works</h3>
+      <div class="explain-grid">
+        <div class="explain-card linear-border">
+          <h4>Linear Search — O(n)</h4>
+          <p>Iterates through all <strong id="totalWordsLinear">…</strong> words from start to finish.
+             For every word it checks whether the word begins with the typed prefix.
+             In the worst case it must inspect every single word.</p>
+        </div>
+        <div class="explain-card binary-border">
+          <h4>Binary Search — O(log n)</h4>
+          <p>The word list is kept <strong>sorted</strong>.
+             Two binary searches pinpoint the exact range of matching words in
+             <strong>O(log n)</strong> comparisons — a classic divide-and-conquer strategy.
+             Only the boundary indices are computed; no full scan is needed.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Algorithm Assignment — Week 04 &nbsp;|&nbsp; Linear vs Binary Search</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
