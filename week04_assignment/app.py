@@ -10,7 +10,7 @@ Closest Pair of Points Web Application
        python app.py
 
   3. 브라우저에서 접속:
-       http://localhost:5000
+       http://localhost:8000
 
 API Endpoints:
   GET  /
@@ -185,4 +185,4 @@ def closest_pair():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=8000)
