@@ -1,97 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dictionary Search — Linear vs Binary</title>
-  <link rel="stylesheet" href="/static/style.css" />
+  <title>Closest Pair of Points</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="layout">
 
-  <header>
-    <h1>English Dictionary Search</h1>
-    <p class="subtitle">Real-time Autocomplete &mdash; Linear Search <span class="vs">vs</span> Binary Search</p>
-  </header>
+    <!-- ── 사이드바 ─────────────────────────────────── -->
+    <aside class="sidebar">
+      <h1>Closest Pair<br /><span>of Points</span></h1>
 
-  <main>
-    <!-- Search bar -->
-    <section class="search-section">
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Type a prefix to search…"
-        autocomplete="off"
-        spellcheck="false"
-      />
-      <span id="wordCount" class="word-count"></span>
-    </section>
+      <section class="control-group">
+        <label for="numPoints">Number of Points (n)</label>
+        <input id="numPoints" type="number" value="20" min="2" max="1000" />
+      </section>
 
-    <!-- Stats bar -->
-    <section id="statsBar" class="stats-bar hidden">
-      <div class="stat">
-        <span class="stat-label">Linear time</span>
-        <span id="linearTime" class="stat-value linear-color">—</span>
+      <div class="btn-group">
+        <button id="btnGenerate" class="btn primary">Generate Random</button>
+        <button id="btnFind"     class="btn accent" disabled>Find Closest Pair</button>
       </div>
-      <div class="stat">
-        <span class="stat-label">Binary time</span>
-        <span id="binaryTime" class="stat-value binary-color">—</span>
-      </div>
-      <div class="stat speedup-stat">
-        <span class="stat-label">Speedup (linear / binary)</span>
-        <span id="speedupRatio" class="stat-value speedup-color">—</span>
-      </div>
-    </section>
 
-    <!-- Side-by-side results -->
-    <section class="results-wrapper">
+      <!-- 결과 패널 -->
+      <section id="resultsPanel" class="results hidden">
+        <h2>Results</h2>
 
-      <div class="results-panel" id="linearPanel">
-        <div class="panel-header linear-bg">
-          <h2>Linear Search</h2>
-          <span class="complexity">O(n) — scan all words</span>
+        <div class="result-card brute">
+          <div class="card-title">Brute Force <span class="badge">O(n²)</span></div>
+          <div class="card-row"><span>Distance</span><strong id="bfDist">—</strong></div>
+          <div class="card-row"><span>Time</span><strong id="bfTime">—</strong></div>
         </div>
-        <ul id="linearResults" class="result-list">
-          <li class="placeholder">Start typing to see results…</li>
-        </ul>
-      </div>
 
-      <div class="results-panel" id="binaryPanel">
-        <div class="panel-header binary-bg">
-          <h2>Binary Search</h2>
-          <span class="complexity">O(log n) — divide &amp; conquer</span>
+        <div class="result-card dc">
+          <div class="card-title">Divide &amp; Conquer <span class="badge">O(n log²n)</span></div>
+          <div class="card-row"><span>Distance</span><strong id="dcDist">—</strong></div>
+          <div class="card-row"><span>Time</span><strong id="dcTime">—</strong></div>
         </div>
-        <ul id="binaryResults" class="result-list">
-          <li class="placeholder">Start typing to see results…</li>
-        </ul>
-      </div>
 
-    </section>
-
-    <!-- Explanation card -->
-    <section class="explanation">
-      <h3>How it works</h3>
-      <div class="explain-grid">
-        <div class="explain-card linear-border">
-          <h4>Linear Search — O(n)</h4>
-          <p>Iterates through all <strong id="totalWordsLinear">…</strong> words from start to finish.
-             For every word it checks whether the word begins with the typed prefix.
-             In the worst case it must inspect every single word.</p>
+        <div class="speedup-box">
+          <span>Speedup Ratio</span>
+          <strong id="speedup">—</strong>
         </div>
-        <div class="explain-card binary-border">
-          <h4>Binary Search — O(log n)</h4>
-          <p>The word list is kept <strong>sorted</strong>.
-             Two binary searches pinpoint the exact range of matching words in
-             <strong>O(log n)</strong> comparisons — a classic divide-and-conquer strategy.
-             Only the boundary indices are computed; no full scan is needed.</p>
+
+        <div class="pair-info">
+          <div class="card-title">Closest Pair</div>
+          <div id="pairCoords" class="pair-coords">—</div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer>
-    <p>Algorithm Assignment — Week 04 &nbsp;|&nbsp; Linear vs Binary Search</p>
-  </footer>
+      <!-- 알고리즘 설명 -->
+      <section class="algo-desc">
+        <h2>Algorithm</h2>
+        <p><strong>Brute Force</strong><br />
+          모든 n(n−1)/2 쌍을 순회하여 최소 거리 탐색.</p>
+        <p><strong>Divide &amp; Conquer</strong></p>
+        <ol>
+          <li>x좌표 기준 정렬</li>
+          <li>LEFT / RIGHT 절반 분할</li>
+          <li>각 절반에서 재귀 탐색 → d</li>
+          <li>분할선 ±d strip 추가 탐색</li>
+          <li>전체 최솟값 반환</li>
+        </ol>
+      </section>
+    </aside>
 
-  <script src="/static/app.js"></script>
+    <!-- ── 캔버스 영역 ────────────────────────────────── -->
+    <main class="canvas-wrap">
+      <canvas id="canvas"></canvas>
+      <p id="hint" class="hint">← Generate Random을 눌러 점을 생성하세요</p>
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
