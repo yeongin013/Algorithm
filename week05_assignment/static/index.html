@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classroom Reservation System</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<header>
+  <h1>Classroom Reservation System</h1>
+  <p class="subtitle">Greedy Activity Selection Algorithm</p>
+</header>
+
+<main>
+
+  <!-- ── Left panel: input ─────────────────── -->
+  <section class="panel" id="input-panel">
+
+    <div class="panel-header">
+      <h2>Reservation Requests</h2>
+      <div class="btn-group">
+        <button id="btn-generate">Generate Random</button>
+        <button id="btn-clear" class="secondary">Clear All</button>
+      </div>
+    </div>
+
+    <!-- Add form -->
+    <form id="add-form">
+      <div class="form-row">
+        <input type="text" id="inp-name" placeholder="Event name" required />
+        <input type="number" id="inp-start" placeholder="Start (0–24)" min="0" max="24" step="0.5" required />
+        <input type="number" id="inp-end"   placeholder="End   (0–24)" min="0" max="24" step="0.5" required />
+        <button type="submit">Add</button>
+      </div>
+    </form>
+
+    <!-- Reservation list -->
+    <div class="reservation-list" id="reservation-list">
+      <p class="empty-msg">No reservations yet. Add one or click "Generate Random".</p>
+    </div>
+
+    <div class="action-bar">
+      <span id="total-count">0 reservations</span>
+      <button id="btn-schedule" disabled>Schedule ▶</button>
+    </div>
+  </section>
+
+  <!-- ── Right panel: results ───────────────── -->
+  <section class="panel" id="result-panel">
+
+    <div class="panel-header">
+      <h2>Schedule Result</h2>
+      <div class="result-stat" id="result-stat"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-wrap">
+      <h3>Timeline Visualization</h3>
+      <div id="timeline"></div>
+      <div class="timeline-axis" id="timeline-axis"></div>
+    </div>
+
+    <!-- Trace -->
+    <div class="trace-wrap">
+      <h3>Step-by-Step Greedy Trace</h3>
+      <div id="trace-list"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
