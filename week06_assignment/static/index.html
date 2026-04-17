@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plagiarism Checker</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Plagiarism Checker</h1>
+    <p class="subtitle">Compare two documents using the Longest Common Subsequence algorithm</p>
+
+    <div class="inputs">
+      <div class="input-block">
+        <label for="textA">Document A</label>
+        <textarea id="textA" placeholder="Paste Document A here..."></textarea>
+      </div>
+      <div class="input-block">
+        <label for="textB">Document B</label>
+        <textarea id="textB" placeholder="Paste Document B here..."></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button id="checkBtn" onclick="runCheck()">Check</button>
+    </div>
+
+    <div id="results" class="results hidden">
+      <div class="stats">
+        <div class="stat-card">
+          <span class="stat-label">Similarity</span>
+          <span class="stat-value" id="similarity">-</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">LCS Length</span>
+          <span class="stat-value" id="lcsLength">-</span>
+        </div>
+      </div>
+
+      <div class="lcs-section">
+        <h3>LCS String</h3>
+        <pre id="lcsString" class="lcs-pre"></pre>
+      </div>
+
+      <div class="diff-section">
+        <h3>Diff View</h3>
+        <div class="legend">
+          <span class="legend-matched">Matched</span>
+          <span class="legend-removed">Removed (A only)</span>
+          <span class="legend-added">Added (B only)</span>
+        </div>
+        <div class="diff-panels">
+          <div class="diff-panel">
+            <div class="diff-label">Document A</div>
+            <div id="diffA" class="diff-content"></div>
+          </div>
+          <div class="diff-panel">
+            <div class="diff-label">Document B</div>
+            <div id="diffB" class="diff-content"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
